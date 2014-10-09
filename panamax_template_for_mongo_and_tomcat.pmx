@@ -1,0 +1,27 @@
+---
+name: Panamax template for mongo and tomcat
+description: Panamax template for mongo db and tomcat. Tomcat will be running on 8080
+  port and mongo will be exposed via 27017 port
+keywords: mongo, tomcat
+type: Tomcat
+documentation: ''
+images:
+- name: mongo_latest
+  source: mongo:latest
+  category: database
+  type: Default
+  ports:
+  - host_port: '27017'
+    container_port: '27017'
+    proto: TCP
+- name: tutum_tomcat
+  source: tutum/tomcat:latest
+  category: webserver
+  type: Default
+  ports:
+  - host_port: '8080'
+    container_port: '8080'
+    proto: TCP
+  links:
+  - service: mongo_latest
+    alias: mongo_latest
